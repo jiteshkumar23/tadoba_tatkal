@@ -1,0 +1,6 @@
+Step1:
+Kill chrome 
+
+Step 2:
+Using command , execute this statement
+start chrome "https://safaribooking.mahaforest.gov.in/Userlogin/index/" --remote-debugging-port=7777 --start-maximized --new-window
