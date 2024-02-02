@@ -146,6 +146,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 
 		System.out.println("###################   Starting   ###################");
 		System.out.println("");
+		printDateTime("Starting Time -->");
 
 		String currentURL = driver.getCurrentUrl();
 		System.out.println(currentURL);
@@ -215,6 +216,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		System.out.println("");
 		System.out.println("Flow successfully completed");
 		System.out.println("###################   Completed   ###################");
+		printDateTime("Ending Time -->");
 
 	}
 
@@ -373,8 +375,12 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		agreementCheckBox.click();
 		wait15.until(ExpectedConditions.alertIsPresent());
 		driver.switchTo().alert().accept();
+		try {
 		wait10.until(ExpectedConditions
 				.textToBePresentInElementLocated(By.xpath("//th[normalize-space()='Grand Total']"), "Grand Total"));
+		}catch(Exception e) {
+			System.out.println("Grand total was not found");
+		}
 		scrollToElementUsingMouse(driver, driver.findElement(By.xpath("//button[@id='btnSubmit']")));
 		scrollDownUsingMouse(driver, 5);
 	}
