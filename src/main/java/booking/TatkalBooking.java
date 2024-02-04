@@ -191,6 +191,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 			}
 
 		}
+		System.out.println("Final Xpath is --> "+xpathForLink);
 		System.out.println("Now attempting to check if link is displayed or not ");
 		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(250));
 
