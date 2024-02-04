@@ -1,0 +1,74 @@
+### AUTOFILL PROFILES ###,,,,,,
+Profile ID,Name,Site,Hotkey,,,
+c10,"Members details","safaribooking.mahaforest.gov.in","Alt + Q",,,
+### AUTOFILL RULES ###,,,,,,
+Rule ID,Type,Name,Value,Site,Mode,Profile
+r1318,0,"^touristName0$","Rajesh Dattatraya Shinde","",0,c10
+r1319,3,"^gender0$","100","",0,c10
+r1320,0,"^indentityNo0$","871506841586","",0,c10
+r1321,0,"^touristName1$","Kunal Sanjay Rane","",0,c10
+r1322,3,"^gender1$","100","",0,c10
+r1323,0,"^indentityNo1$","992051557515","",0,c10
+r1324,0,"^touristName2$","Vinita Rajesh Shinde","",0,c10
+r1325,3,"^gender2$","010","",0,c10
+r1326,0,"^indentityNo2$","854699068528","",0,c10
+r1327,0,"^touristName3$","Manasi Rajesh Shinde ","",0,c10
+r1328,3,"^gender3$","010","",0,c10
+r1329,0,"^indentityNo3$","377431217920","",0,c10
+r1330,0,"^touristName4$","Kamal Mahadeo Jadhav","",0,c10
+r1331,3,"^gender4$","010","",0,c10
+r1332,0,"^indentityNo4$","663711409603","",0,c10
+r1333,0,"^touristName5$","Rajendra","",0,c10
+r1334,3,"^gender5$","100","",0,c10
+r1335,0,"^indentityNo5$","875236548752","",0,c10
+r1336,0,"^children_name1$","","",0,c10
+r1337,0,"^children_name2$","","",0,c10
+r1338,0,"^mobile_no$","9268565536","",0,c10
+r1339,3,"^Yes$","0","",0,c10
+r1340,3,"^No$","1","",0,c10
+r1343,2,"^age0$","""51""","",0,c10
+r1344,2,"^cmbCountry0$","""356""","",0,c10
+r1345,2,"^cmbIndentity0$","""1""","",0,c10
+r1346,2,"^age1$","""23""","",0,c10
+r1347,2,"^cmbCountry1$","""356""","",0,c10
+r1348,2,"^cmbIndentity1$","""1""","",0,c10
+r1349,2,"^age2$","""50""","",0,c10
+r1350,2,"^cmbCountry2$","""356""","",0,c10
+r1351,2,"^cmbIndentity2$","""1""","",0,c10
+r1352,2,"^age3$","""23""","",0,c10
+r1353,2,"^cmbCountry3$","""356""","",0,c10
+r1354,2,"^cmbIndentity3$","""1""","",0,c10
+r1355,2,"^age4$","""68""","",0,c10
+r1356,2,"^cmbCountry4$","""356""","",0,c10
+r1357,2,"^cmbIndentity4$","""1""","",0,c10
+r1358,2,"^age5$","""34""","",0,c10
+r1359,2,"^cmbCountry5$","""356""","",0,c10
+r1360,2,"^cmbIndentity5$","""1""","",0,c10
+r1361,2,"^child_age1$","""""","",0,c10
+r1362,2,"^child_age2$","""""","",0,c10
+r1363,0,"^address$","Noida 135","",0,c10
+### AUTOFILL OPTIONS ###,,,,,,
+advanced,"[]",,,,,
+exceptions,"[]",,,,,
+textclips,"[]",,,,,
+variables,"[]",,,,,
+activecat,1,,,,,
+attributesoff,0,,,,,
+autoimport,0,,,,,
+backup,0,30,,,,
+badge,0,,,,,
+closeinfobar,0,,,,,
+debug,0,,,,,
+delay,0,1,,,,
+filtercats,0,,,,,
+fluid,0,,,,,
+hidebackup,0,,,,,
+manual,0,,,,,
+mask,1,,,,,
+menu,1,,,,,
+overwrite,0,,,,,
+sitefilters,0,,,,,
+skiphidden,0,,,,,
+sound,1,,,,,
+vars,1,,,,,
+voice,0,1,,,,
