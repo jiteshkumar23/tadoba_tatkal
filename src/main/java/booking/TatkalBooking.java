@@ -191,39 +191,54 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 			}
 
 		}
-		System.out.println("Final Xpath is --> "+xpathForLink);
+		System.out.println("Final Xpath is --> " + xpathForLink);
 		System.out.println("Now attempting to check if link is displayed or not ");
 		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(250));
 
 		while (!isElementPresent(driver, By.xpath(xpathForLink))) {
 
-			System.out.println("Link is not displayed yet");
+			System.out.println("Link is not displayed yet with this xapth -->" + xpathForLink);
 			// Click the button
 			driver.findElement(By.xpath("//button[@id='btnSubmit']")).click();
 			System.out.println("Search button clicked");
 			Thread.sleep(500);
 			waitForDisplayOfTable();
 		}
-		System.out.println("Link was displayed , proceeding ahead");
+		System.out.println("Link was displayed , proceeding ahead -->" + xpathForLink);
+		System.out.println("Shift selected -->" + shiftFromData);
+		System.out.println("Gate selected -->" + gateFromData);
 		Thread.sleep(250);
 		try {
-			wait15.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(xpathForLink))));
-			wait15.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(xpathForLink))));
 			Thread.sleep(250);
+			System.out.println("Link count is -->" + driver.findElements(By.xpath(xpathForLink)).size());
+			wait10.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath(xpathForLink), 0));
+			System.out.println("Wait for size to be more than 0 is OVER");
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+			System.out.println("About to click the link with xpath " + xpathForLink);
 			driver.findElement(By.xpath(xpathForLink)).click();
 			System.out.println("###################   Link Clicked   ###################");
 			System.out.println("");
 			printDateTime("Link Clicked Time -->");
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
+			System.out.println("I am in Exception block , retrying -->" + e);
 			e.printStackTrace();
+			waitForDisplayOfTable();
+			System.out.println("In exception block - Link count is -->" + driver.findElements(By.xpath(xpathForLink)).size());
+			wait10.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath(xpathForLink), 0));
+			System.out.println("In exception block - Wait for size to be more than 0 is OVER");
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+			System.out.println("In exception block - About to click the link with xpath " + xpathForLink);
+			driver.findElement(By.xpath(xpathForLink)).click();
+			System.out.println("###################  In exception block -  Link Clicked   ###################");
+			System.out.println("");
+			printDateTime("In exception block -->Link Clicked Time -->");
 		}
 
 	}
 
 	private static void waitForDisplayOfTable() {
 		wait15.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='bookingHtml']")));
-
+		System.out.println("Executed after wait for Table: probably table was displayed");
 	}
 
 	private static void doUPIPayment() {
