@@ -106,7 +106,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 
 		if (typeOfBooking.toLowerCase().equalsIgnoreCase("regular")) {
 			// select Date for Regular flow from test data : Regular change 2
-			selectRegularBookingDateInCalendar("29/05/2024"); // for Regular flow
+			selectRegularBookingDateInCalendar("04/06/2024"); // for Regular flow
 		}
 
 		// click on search button
@@ -242,7 +242,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	}
 
 	private static void doUPIPayment() {
-		wait15.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Other Payment Modes']")));
+		//wait15.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Other Payment Modes']")));
 		WebElement upiLink = driver
 				.findElement(By.xpath("//*[text()='Other Payment Modes']/../../following-sibling::div/a"));
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -251,9 +251,9 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		wait15.until(ExpectedConditions.urlContains("merchantotherupidisplay"));
 		wait15.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("label[for='QRcode']")));
 		WebElement qrCode = driver.findElement(By.cssSelector("label[for='QRcode']"));
-		qrCode.click();
-		wait15.until(ExpectedConditions.urlContains("merchantinterotherconfirm"));
-		scrollDownUsingMouse(driver, 5);
+		executor.executeScript("arguments[0].click();", qrCode);
+		//wait15.until(ExpectedConditions.urlContains("merchantinterotherconfirm"));
+		//scrollDownUsingMouse(driver, 5);
 
 	}
 
