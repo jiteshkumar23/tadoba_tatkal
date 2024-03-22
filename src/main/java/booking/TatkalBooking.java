@@ -160,7 +160,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	private static void clickOnLinkForRegularFlow() throws InterruptedException {
 		wait15.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//tbody/tr[3]//a)[1]")));
 		WebElement availableOption = driver.findElement(By.xpath("(//tbody/tr[3]//a)[1]"));
-		Thread.sleep(250);
+		//Thread.sleep(250);
 		wait15.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("(//tbody/tr[3]//a)[1]"))));
 		driver.findElement(By.xpath("(//tbody/tr[3]//a)[1]")).click();
 		System.out.println("###################   Link Clicked   ###################");
@@ -207,9 +207,9 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		System.out.println("Link was displayed , proceeding ahead -->" + xpathForLink);
 		System.out.println("Shift selected -->" + shiftFromData);
 		System.out.println("Gate selected -->" + gateFromData);
-		Thread.sleep(250);
+		//Thread.sleep(250);
 		try {
-			Thread.sleep(250);
+		//	Thread.sleep(250);
 			System.out.println("Link count is -->" + driver.findElements(By.xpath(xpathForLink)).size());
 			wait10.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath(xpathForLink), 0));
 			System.out.println("Wait for size to be more than 0 is OVER");
@@ -322,11 +322,13 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		WebElement payButton = driver.findElement(By.xpath("//button[@id='btnSubmit']"));
 		wait15.until(ExpectedConditions.elementToBeClickable(payButton));
 		try {
-			payButton.click();
+			js.executeScript("arguments[0].click();", payButton);
+			//payButton.click();
 			wait5.until(ExpectedConditions.urlContains("merchant"));
 		} catch (Exception e) {
 			try {
-				payButton.click();
+				js.executeScript("arguments[0].click();", payButton);
+			//	payButton.click();
 			} catch (Exception e2) {
 				System.out.println("Some error - merchant was not seen in URL -->" + driver.getCurrentUrl());
 			}
@@ -336,9 +338,10 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	private static void selectAgreement() throws InterruptedException {
 
 		WebElement agreementCheckBox = driver.findElement(By.xpath("//input[@id='agree_term']"));
-		scrollToElementUsingMouse(driver, agreementCheckBox);
-		Thread.sleep(200);
-		agreementCheckBox.click();
+		js.executeScript("arguments[0].click();", agreementCheckBox);
+		//scrollToElementUsingMouse(driver, agreementCheckBox);
+		//Thread.sleep(200);
+		//agreementCheckBox.click();
 		wait15.until(ExpectedConditions.alertIsPresent());
 		driver.switchTo().alert().accept();
 		try {
@@ -347,10 +350,10 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		} catch (Exception e) {
 			System.out.println("Grand total was not found");
 		}
-		scrollToElementUsingMouse(driver, driver.findElement(By.xpath("//button[@id='btnSubmit']")));
-		Thread.sleep(100);
-		scrollDownUsingMouse(driver, 5);
-		Thread.sleep(200);
+//		scrollToElementUsingMouse(driver, driver.findElement(By.xpath("//button[@id='btnSubmit']")));
+//		Thread.sleep(100);
+//		scrollDownUsingMouse(driver, 5);
+//		Thread.sleep(200);
 	}
 
 	private static void selectNumberOfPeopleInDropdown() {
