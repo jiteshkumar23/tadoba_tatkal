@@ -1,5 +1,6 @@
 Latest Note:
 
+version 2.4 - 04/04/2024 - Clicking on link made faster by using a new logic
 version 2.3 - 22/03/2024 - minor change to click of QR Code link
 version 2.2 - 22/03/2024 - used javascript for button clicks and removed scroll and removed extra waits
 version 2.1 - 04/02/2024 - minor update
