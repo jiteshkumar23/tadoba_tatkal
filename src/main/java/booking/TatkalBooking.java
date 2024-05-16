@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TatkalBooking extends TatkalBooking_DataProfile1 {
-	static ChromeDriver driver;
+	static WebDriver driver;
 	static JavascriptExecutor js;
 	static WebDriverWait waitnew;
 	static WebDriverWait wait2;
@@ -53,7 +53,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	public static void prerequisite() throws InterruptedException, IOException {
 
 		// Create ChromeOptions instance
-		WebDriverManager.chromedriver().setup();
+		//WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
 
 		// Set the remote debugging address
