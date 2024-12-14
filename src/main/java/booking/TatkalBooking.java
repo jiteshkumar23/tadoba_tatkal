@@ -97,17 +97,17 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		selectZone();
 
 		if (typeOfBooking.toLowerCase().equalsIgnoreCase("regular")) {
-			// select vehicle for Regular : Regular change 1
-			selectVehicleForRegularFlow();
+		    // select vehicle for Regular : Regular change 1
+		    selectVehicleForRegularFlow();
 		}
 
 		if (typeOfBooking.toLowerCase().equalsIgnoreCase("tatkal")) {
-			selectDateForTatkalFlow();// for Tatkal flow
+		    selectDateForTatkalFlow(); // for Tatkal flow
 		}
 
 		if (typeOfBooking.toLowerCase().equalsIgnoreCase("regular")) {
-			// select Date for Regular flow from test data : Regular change 2
-			selectRegularBookingDateInCalendar("04/06/2024"); // for Regular flow
+		    // select Date for Regular flow from test data : Regular change 2
+		    selectRegularBookingDateInCalendar("23/03/2025"); // for Regular flow
 		}
 
 		// click on search button
@@ -117,13 +117,14 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		//waitForDisplayOfTable();
 
 		if (typeOfBooking.toLowerCase().equalsIgnoreCase("regular")) {
-			// Click on link for Regular flow : : Regular change 3
-			clickOnLinkForRegularFlow();
+		    // Click on link for Regular flow : : Regular change 3
+		    clickOnLinkForRegularFlow();
 		}
 
 		if (typeOfBooking.toLowerCase().equalsIgnoreCase("tatkal")) {
-			clickOnLinkForTatkalFlow();
+		    clickOnLinkForTatkalFlow();
 		}
+
 		setMaxCount();
 
 		// select number of people in dropdown
@@ -137,15 +138,16 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		clickOnPayButton();
 
 		if (paymentMode.toLowerCase().equalsIgnoreCase("upi")) {
-			doUPIPayment();
+		    doUPIPayment();
 		} else if (paymentMode.toLowerCase().equalsIgnoreCase("credit card")) {
-			doCreditCardPayment();
+		    doCreditCardPayment();
 		}
 
 		System.out.println("");
 		System.out.println("Flow successfully completed");
 		System.out.println("###################   Completed   ###################");
 		printDateTime("Ending Time -->");
+
 
 	}
 
@@ -159,17 +161,42 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	}
 
 	private static void clickOnLinkForRegularFlow() throws InterruptedException {
-		wait15.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//tbody/tr[3]//a)[1]")));
-		WebElement availableOption = driver.findElement(By.xpath("(//tbody/tr[3]//a)[1]"));
-		//Thread.sleep(250);
-		wait15.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("(//tbody/tr[3]//a)[1]"))));
-		driver.findElement(By.xpath("(//tbody/tr[3]//a)[1]")).click();
-		System.out.println("###################   Link Clicked   ###################");
-		System.out.println("");
-		printDateTime("Link Clicked Time -->");
+//		wait15.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//tbody/tr[4]/td[9]//a)[1]")));
+//		WebElement availableOption = driver.findElement(By.xpath("(//tbody/tr[4]/td[9]//a)[1]"));
+//		//Thread.sleep(250);
+//		wait15.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("(//tbody/tr[4]/td[9]//a)[1]"))));
+//		driver.findElement(By.xpath("(//tbody/tr[4]/td[9]//a)[1]")).click();
+//		System.out.println("###################   Link Clicked   ###################");
+//		System.out.println("");
+//		printDateTime("Link Clicked Time -->");
+		
+		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+		xpathForLink = "(//tbody/tr[4]/td[8]//a)[1]";
+		while(!linkDisplayed) {
+			
+			try {
+			System.out.println("Was link displayed (zero means No)  --> "+driver.findElements(By.xpath(xpathForLink)).size());
+			if(driver.findElements(By.xpath(xpathForLink)).size()>0) {
+				System.out.println("Link was displayed , proceeding ahead -->" + xpathForLink);
+				linkDisplayed=true;
+				js.executeScript("arguments[0].click();", driver.findElement(By.xpath(xpathForLink)));
+				break;
+			}else {
+			Thread.sleep(500);
+			//Click the search button
+			System.out.println("Link was not displayed , clicking search button");
+			driver.findElement(By.xpath("//button[@id='btnSubmit']")).click();
+			}
+			}catch (Exception e) {
+				System.out.println("Some exception is there, but i will continue to try --> "+e);
+			}
+		}
+		
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
 	}
 
+	
 	private static void clickOnLinkForTatkalFlow() throws InterruptedException {
 
 		if (shiftFromData.toLowerCase().equalsIgnoreCase("morning")) {
@@ -209,7 +236,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 //			waitForDisplayOfTable();
 //		}
 		
-		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(50));
+		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 		
 		while(!linkDisplayed) {
 			
@@ -221,8 +248,9 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 				js.executeScript("arguments[0].click();", driver.findElement(By.xpath(xpathForLink)));
 				break;
 			}else {
-			Thread.sleep(150);
+			Thread.sleep(500);
 			//Click the search button
+			System.out.println("Link was not displayed , clicking search button");
 			driver.findElement(By.xpath("//button[@id='btnSubmit']")).click();
 			}
 			}catch (Exception e) {
@@ -344,6 +372,9 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	}
 
 	private static void clickOnPayButton() {
+		
+
+		wait15.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='paymentView']//tbody/tr[3]/td")));
 		WebElement payButton = driver.findElement(By.xpath("//button[@id='btnSubmit']"));
 		wait15.until(ExpectedConditions.elementToBeClickable(payButton));
 		try {
@@ -361,7 +392,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	}
 
 	private static void selectAgreement() throws InterruptedException {
-
+		wait15.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='agree_term']")));
 		WebElement agreementCheckBox = driver.findElement(By.xpath("//input[@id='agree_term']"));
 		js.executeScript("arguments[0].click();", agreementCheckBox);
 		//scrollToElementUsingMouse(driver, agreementCheckBox);
@@ -397,8 +428,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		}
 
 		wait15.until(
-				ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//input[@id='touristName0']"))));
-
+				ExpectedConditions.visibilityOfElementLocated((By.xpath("//input[@id='touristName0']"))));
 	}
 
 	private static void clickOnSearchButton() {
