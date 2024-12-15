@@ -413,8 +413,8 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	try {
         WebElement payButton = driver.findElement(By.xpath("//button[@id='btnSubmit']"));
         wait15.until(ExpectedConditions.elementToBeClickable(payButton));
-        js.executeScript("arguments[0].click();", payButton);
-        System.out.println("first pay now clicked");
+//        js.executeScript("arguments[0].click();", payButton);
+//        System.out.println("first pay now clicked");
 //       for(int i=0;i<5;i++) {
 //    	   js.executeScript("arguments[0].click();", payButton);
 //    	   System.out.println("Pay button clicked in for loop");
