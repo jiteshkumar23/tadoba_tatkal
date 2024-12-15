@@ -171,26 +171,41 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 //		printDateTime("Link Clicked Time -->");
 		
 		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-		xpathForLink = "(//tbody/tr[4]/td[8]//a)[1]";
-		while(!linkDisplayed) {
-			
-			try {
-			System.out.println("Was link displayed (zero means No)  --> "+driver.findElements(By.xpath(xpathForLink)).size());
-			if(driver.findElements(By.xpath(xpathForLink)).size()>0) {
-				System.out.println("Link was displayed , proceeding ahead -->" + xpathForLink);
-				linkDisplayed=true;
-				js.executeScript("arguments[0].click();", driver.findElement(By.xpath(xpathForLink)));
-				break;
-			}else {
-			Thread.sleep(500);
-			//Click the search button
-			System.out.println("Link was not displayed , clicking search button");
-			driver.findElement(By.xpath("//button[@id='btnSubmit']")).click();
-			}
-			}catch (Exception e) {
-				System.out.println("Some exception is there, but i will continue to try --> "+e);
-			}
-		}
+		xpathForLink = "//tbody/tr[4]/td[10]";
+		try {
+            // Loop until the link is displayed and clickable
+            while (true) {
+                try {
+                	
+                	WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(250));
+                	WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathForLink)));
+                    System.out.println("Text displayed is "+linkElement.getText());
+                	if (linkElement.getText().contains("1") || 
+                			linkElement.getText().contains("2")|| 
+                			linkElement.getText().contains("3")|| 
+                			linkElement.getText().contains("4")|| 
+                			linkElement.getText().contains("5")|| 
+                			linkElement.getText().contains("6")) {
+                        // Click the link using JavaScript
+                		xpathForLink = xpathForLink+"//a";
+                		js.executeScript("arguments[0].click();", driver.findElement(By.xpath(xpathForLink)));
+                        System.out.println("Link with specific text clicked successfully!");
+                        break; // Exit the loop if the link is clicked
+
+                	}else {
+                		System.out.println("Link not found, clicking search button...");
+                        driver.findElement(By.xpath("//button[@id='btnSubmit']")).click();;
+                	}
+                	} catch (Exception e) {
+                		System.out.println("Some exception is there, but i will continue to try --> ");
+                        e.printStackTrace();
+                }
+            }
+            
+        } catch (Exception e) {
+        	System.out.println("Some exception is there, but i will continue to try --> ");
+            e.printStackTrace();
+        }
 		
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
@@ -203,19 +218,19 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 
 			if (gateFromData.toLowerCase().equalsIgnoreCase("Zari")) {
 
-				xpathForLink = "//tbody/tr[4]/td[6]/a[1]";
+				xpathForLink = "//tbody/tr[4]/td[6]";
 
 			} else {
-				xpathForLink = "//tbody/tr[3]/td[6]/a[1]";
+				xpathForLink = "//tbody/tr[3]/td[6]";
 			}
 
 		} else if (shiftFromData.toLowerCase().equalsIgnoreCase("afternoon")) {
 
 			if (gateFromData.toLowerCase().equalsIgnoreCase("Zari")) {
 
-				xpathForLink = "//tbody/tr[4]/td[7]/a[1]";
+				xpathForLink = "//tbody/tr[4]/td[7]";
 			} else {
-				xpathForLink = "//tbody/tr[3]/td[7]/a[1]";
+				xpathForLink = "//tbody/tr[3]/td[7]";
 			}
 
 		}
@@ -224,39 +239,41 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		System.out.println("Shift selected -->" + shiftFromData);
 		System.out.println("Gate selected -->" + gateFromData);
 		System.out.println("Now attempting to check if link is displayed or not ");
-		
+	
+		try {
+            // Loop until the link is displayed and clickable
+            while (true) {
+                try {
+                	
+                	WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(250));
+                	WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathForLink)));
+                    System.out.println("Text displayed is "+linkElement.getText());
+                	if (linkElement.getText().contains("1") || 
+                			linkElement.getText().contains("2")|| 
+                			linkElement.getText().contains("3")|| 
+                			linkElement.getText().contains("4")|| 
+                			linkElement.getText().contains("5")|| 
+                			linkElement.getText().contains("6")) {
+                        // Click the link using JavaScript
+                		xpathForLink = xpathForLink+"//a";
+                		js.executeScript("arguments[0].click();", driver.findElement(By.xpath(xpathForLink)));
+                        System.out.println("Link with specific text clicked successfully!");
+                        break; // Exit the loop if the link is clicked
 
-//		while (!isElementPresent(driver, By.xpath(xpathForLink))) {
-//
-//			System.out.println("Link is not displayed yet with this xapth -->" + xpathForLink);
-//			// Click the button
-//			driver.findElement(By.xpath("//button[@id='btnSubmit']")).click();
-//			System.out.println("Search button clicked");
-//			Thread.sleep(500);
-//			waitForDisplayOfTable();
-//		}
-		
-		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-		
-		while(!linkDisplayed) {
-			
-			try {
-			System.out.println("Was link displayed (zero means No)  --> "+driver.findElements(By.xpath(xpathForLink)).size());
-			if(driver.findElements(By.xpath(xpathForLink)).size()>0) {
-				System.out.println("Link was displayed , proceeding ahead -->" + xpathForLink);
-				linkDisplayed=true;
-				js.executeScript("arguments[0].click();", driver.findElement(By.xpath(xpathForLink)));
-				break;
-			}else {
-			Thread.sleep(500);
-			//Click the search button
-			System.out.println("Link was not displayed , clicking search button");
-			driver.findElement(By.xpath("//button[@id='btnSubmit']")).click();
-			}
-			}catch (Exception e) {
-				System.out.println("Some exception is there, but i will continue to try --> "+e);
-			}
-		}
+                	}else {
+                		System.out.println("Link not found, clicking search button...");
+                        driver.findElement(By.xpath("//button[@id='btnSubmit']")).click();;
+                	}
+                	} catch (Exception e) {
+                		System.out.println("Some exception is there, but i will continue to try --> ");
+                        e.printStackTrace();
+                }
+            }
+            
+        } catch (Exception e) {
+        	System.out.println("Some exception is there, but i will continue to try --> ");
+            e.printStackTrace();
+        }
 		
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 		
@@ -374,23 +391,48 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	private static void clickOnPayButton() {
 		
 
-		wait15.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='paymentView']//tbody/tr[3]/td")));
-		WebElement payButton = driver.findElement(By.xpath("//button[@id='btnSubmit']"));
-		wait15.until(ExpectedConditions.elementToBeClickable(payButton));
-		try {
-			js.executeScript("arguments[0].click();", payButton);
-			//payButton.click();
-			wait5.until(ExpectedConditions.urlContains("merchant"));
-		} catch (Exception e) {
-			try {
-				js.executeScript("arguments[0].click();", payButton);
-			//	payButton.click();
-			} catch (Exception e2) {
-				System.out.println("Some error - merchant was not seen in URL -->" + driver.getCurrentUrl());
-			}
-		}
-	}
+		//wait15.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='paymentView']//tbody/tr[3]/td")));
+		
+//		WebElement payButton = driver.findElement(By.xpath("//button[@id='btnSubmit']"));
+//		wait15.until(ExpectedConditions.elementToBeClickable(payButton));
+//		try {
+//			js.executeScript("arguments[0].click();", payButton);
+//			//payButton.click();
+//			wait5.until(ExpectedConditions.urlContains("merchant"));
+//		} catch (Exception e) {
+//			try {
+//				js.executeScript("arguments[0].click();", payButton);
+//			//	payButton.click();
+//			} catch (Exception e2) {
+//				System.out.println("Some error - merchant was not seen in URL -->" + driver.getCurrentUrl());
+//			}
+//		}
+//	}
 
+	
+	try {
+        WebElement payButton = driver.findElement(By.xpath("//button[@id='btnSubmit']"));
+        wait15.until(ExpectedConditions.elementToBeClickable(payButton));
+       for(int i=0;i<10;i++) {
+    	   js.executeScript("arguments[0].click();", payButton);
+    	   System.out.println("Pay button clicked in for loop");
+       }
+        // Continuously click Pay button until URL contains "merchant"
+        while (!driver.getCurrentUrl().contains("merchant")) {
+            try {
+            	System.out.println(driver.getCurrentUrl());
+                js.executeScript("arguments[0].click();", payButton);
+                System.out.println("Pay button clicked in while loop");
+            } catch (Exception e) {
+                System.out.println("Pay button click attempt failed. Retrying...");
+            }
+        }
+        System.out.println("URL after while loop is done -->"+driver.getCurrentUrl());
+    } catch (Exception e) {
+        System.out.println("An error occurred: " + e.getMessage());
+    }
+	}
+	
 	private static void selectAgreement() throws InterruptedException {
 		wait15.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='agree_term']")));
 		WebElement agreementCheckBox = driver.findElement(By.xpath("//input[@id='agree_term']"));
