@@ -1,0 +1,53 @@
+[
+  {
+    "key": "alt+q",
+    "label": "filltouristInformation",
+    "action": "javascript",
+    "activeInInputs": true,
+    "blacklist": false,
+    "sites": "https://booking.corbettgov.org/resort/\nhttps://booking.corbettgov.org/resort/#\nhttps://booking.corbettgov.org/resort#",
+    "code": "document.querySelector(\"#address\").value=\"Address Line 1\";\ndocument.querySelector(\"#mobile_no\").value = \"9796959798\";\ndocument.querySelector(\"input[name='your_camera'][value='No']\").click();\ndocument.querySelector('#touristName0').value = \"Rajesh Dattatraya Jack\";\ndocument.querySelector(\"input[value='Male'][name='gender0']\").click();\ndocument.querySelector(\"#age0\").value = \"21\";\ndocument.querySelector(\"#cmbIndentity0\").value = \"1\";\ndocument.querySelector(\"#indentityNo0\").value = \"987897567840\";\ndocument.querySelector('#touristName1').value = \"Rajesh Dattatraya D\";\ndocument.querySelector(\"input[value='Female'][name='gender1']\").click();\ndocument.querySelector(\"#age1\").value = \"22\";\ndocument.querySelector(\"#cmbIndentity1\").value = \"1\";\ndocument.querySelector(\"#indentityNo1\").value = \"987897567841\";\ndocument.querySelector('#touristName2').value = \"Rajesh Dattatraya Da\";\ndocument.querySelector(\"input[value='Transgender'][name='gender2']\").click();\ndocument.querySelector(\"#age2\").value = \"23\";\ndocument.querySelector(\"#cmbIndentity2\").value = \"1\";\ndocument.querySelector(\"#indentityNo2\").value = \"987897567842\";\ndocument.querySelector('#touristName3').value = \"Rajesh Dattatraya Daw\";\ndocument.querySelector(\"input[value='Male'][name='gender3']\").click();\ndocument.querySelector(\"#age3\").value = \"24\";\ndocument.querySelector(\"#cmbIndentity3\").value = \"1\";\ndocument.querySelector(\"#indentityNo3\").value = \"987897567843\";\ndocument.querySelector('#touristName4').value = \"Rajesh Dattatraya Daws\";\ndocument.querySelector(\"input[value='Male'][name='gender4']\").click();\ndocument.querySelector(\"#age4\").value = \"25\";\ndocument.querySelector(\"#cmbIndentity4\").value = \"1\";\ndocument.querySelector(\"#indentityNo4\").value = \"987897567844\";\ndocument.querySelector('#touristName5').value = \"Rajesh Dattatraya Dawson\";\ndocument.querySelector(\"input[value='Male'][name='gender5']\").click();\ndocument.querySelector(\"#age5\").value = \"26\";\ndocument.querySelector(\"#cmbIndentity5\").value = \"1\";\ndocument.querySelector(\"#indentityNo5\").value = \"987897567845\";",
+    "sitesArray": [
+      "https://booking.corbettgov.org/resort/",
+      "https://booking.corbettgov.org/resort/#",
+      "https://booking.corbettgov.org/resort#"
+    ]
+  }
+]
+
+
+alt+q
+
+document.querySelector("#address").value="Address Line 1";
+document.querySelector("#mobile_no").value = "9796959798";
+document.querySelector("input[name='your_camera'][value='No']").click();
+document.querySelector('#touristName0').value = "Rajesh Dattatraya Jack";
+document.querySelector("input[value='Male'][name='gender0']").click();
+document.querySelector("#age0").value = "21";
+document.querySelector("#cmbIndentity0").value = "1";
+document.querySelector("#indentityNo0").value = "987897567840";
+document.querySelector('#touristName1').value = "Rajesh Dattatraya D";
+document.querySelector("input[value='Female'][name='gender1']").click();
+document.querySelector("#age1").value = "22";
+document.querySelector("#cmbIndentity1").value = "1";
+document.querySelector("#indentityNo1").value = "987897567841";
+document.querySelector('#touristName2').value = "Rajesh Dattatraya Da";
+document.querySelector("input[value='Transgender'][name='gender2']").click();
+document.querySelector("#age2").value = "23";
+document.querySelector("#cmbIndentity2").value = "1";
+document.querySelector("#indentityNo2").value = "987897567842";
+document.querySelector('#touristName3').value = "Rajesh Dattatraya Daw";
+document.querySelector("input[value='Male'][name='gender3']").click();
+document.querySelector("#age3").value = "24";
+document.querySelector("#cmbIndentity3").value = "1";
+document.querySelector("#indentityNo3").value = "987897567843";
+document.querySelector('#touristName4').value = "Rajesh Dattatraya Daws";
+document.querySelector("input[value='Male'][name='gender4']").click();
+document.querySelector("#age4").value = "25";
+document.querySelector("#cmbIndentity4").value = "1";
+document.querySelector("#indentityNo4").value = "987897567844";
+document.querySelector('#touristName5').value = "Rajesh Dattatraya Dawson";
+document.querySelector("input[value='Male'][name='gender5']").click();
+document.querySelector("#age5").value = "26";
+document.querySelector("#cmbIndentity5").value = "1";
+document.querySelector("#indentityNo5").value = "987897567845";
