@@ -171,7 +171,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 //		printDateTime("Link Clicked Time -->");
 		
 		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-		xpathForLink = "//tbody/tr[4]/td[10]";
+		xpathForLink = "//tbody/tr[3]/td[10]";
 		try {
             // Loop until the link is displayed and clickable
             while (true) {
@@ -413,15 +413,20 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	try {
         WebElement payButton = driver.findElement(By.xpath("//button[@id='btnSubmit']"));
         wait15.until(ExpectedConditions.elementToBeClickable(payButton));
-       for(int i=0;i<10;i++) {
-    	   js.executeScript("arguments[0].click();", payButton);
-    	   System.out.println("Pay button clicked in for loop");
-       }
+        js.executeScript("arguments[0].click();", payButton);
+        System.out.println("first pay now clicked");
+//       for(int i=0;i<5;i++) {
+//    	   js.executeScript("arguments[0].click();", payButton);
+//    	   System.out.println("Pay button clicked in for loop");
+//    	   Thread.sleep(250);
+//       }
         // Continuously click Pay button until URL contains "merchant"
         while (!driver.getCurrentUrl().contains("merchant")) {
             try {
             	System.out.println(driver.getCurrentUrl());
                 js.executeScript("arguments[0].click();", payButton);
+                System.out.println("waited 500 ms");
+                Thread.sleep(500);
                 System.out.println("Pay button clicked in while loop");
             } catch (Exception e) {
                 System.out.println("Pay button click attempt failed. Retrying...");
