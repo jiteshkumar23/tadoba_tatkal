@@ -82,7 +82,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 
 		System.out.println("###################   Starting   ###################");
 		System.out.println("");
-		printDateTime("Starting Time -->");
+		//printDateTime("Starting Time -->");
 
 		String currentURL = driver.getCurrentUrl();
 		System.out.println(currentURL);
@@ -107,7 +107,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 
 		if (typeOfBooking.toLowerCase().equalsIgnoreCase("regular")) {
 		    // select Date for Regular flow from test data : Regular change 2
-		    selectRegularBookingDateInCalendar("23/03/2025"); // for Regular flow
+		    selectRegularBookingDateInCalendar("07/04/2025"); // for Regular flow
 		}
 
 		// click on search button
@@ -137,11 +137,11 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 
 		clickOnPayButton();
 
-		if (paymentMode.toLowerCase().equalsIgnoreCase("upi")) {
-		    doUPIPayment();
-		} else if (paymentMode.toLowerCase().equalsIgnoreCase("credit card")) {
-		    doCreditCardPayment();
-		}
+//		if (paymentMode.toLowerCase().equalsIgnoreCase("upi")) {
+//		    doUPIPayment();
+//		} else if (paymentMode.toLowerCase().equalsIgnoreCase("credit card")) {
+//		    doCreditCardPayment();
+//		}
 
 		System.out.println("");
 		System.out.println("Flow successfully completed");
@@ -188,8 +188,10 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
                 			linkElement.getText().contains("6")) {
                         // Click the link using JavaScript
                 		xpathForLink = xpathForLink+"//a";
+                		printDateTime("Link displayed time and clicked  -->");
                 		js.executeScript("arguments[0].click();", driver.findElement(By.xpath(xpathForLink)));
                         System.out.println("Link with specific text clicked successfully!");
+             
                         break; // Exit the loop if the link is clicked
 
                 	}else {
@@ -258,6 +260,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
                 		xpathForLink = xpathForLink+"//a";
                 		js.executeScript("arguments[0].click();", driver.findElement(By.xpath(xpathForLink)));
                         System.out.println("Link with specific text clicked successfully!");
+                        printDateTime("Starting Time -->");
                         break; // Exit the loop if the link is clicked
 
                 	}else {
@@ -447,12 +450,12 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		//agreementCheckBox.click();
 		wait15.until(ExpectedConditions.alertIsPresent());
 		driver.switchTo().alert().accept();
-		try {
-			wait10.until(ExpectedConditions
-					.textToBePresentInElementLocated(By.xpath("//th[normalize-space()='Grand Total']"), "Grand Total"));
-		} catch (Exception e) {
-			System.out.println("Grand total was not found");
-		}
+//		try {
+//			wait10.until(ExpectedConditions
+//					.textToBePresentInElementLocated(By.xpath("//th[normalize-space()='Grand Total']"), "Grand Total"));
+//		} catch (Exception e) {
+//			System.out.println("Grand total was not found");
+//		}
 //		scrollToElementUsingMouse(driver, driver.findElement(By.xpath("//button[@id='btnSubmit']")));
 //		Thread.sleep(100);
 //		scrollDownUsingMouse(driver, 5);
