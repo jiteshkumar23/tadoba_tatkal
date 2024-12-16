@@ -107,7 +107,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 
 		if (typeOfBooking.toLowerCase().equalsIgnoreCase("regular")) {
 		    // select Date for Regular flow from test data : Regular change 2
-		    selectRegularBookingDateInCalendar("07/04/2025"); // for Regular flow
+		    selectRegularBookingDateInCalendar("09/04/2025"); // for Regular flow
 		}
 
 		// click on search button
@@ -133,6 +133,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		// enter Member details from Autofill plugin
 		fillMemberDetailsfromAutoFillPlugin();
 
+		Thread.sleep(200);		
 		selectAgreement();
 
 		clickOnPayButton();
@@ -185,7 +186,10 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
                 			linkElement.getText().contains("3")|| 
                 			linkElement.getText().contains("4")|| 
                 			linkElement.getText().contains("5")|| 
-                			linkElement.getText().contains("6")) {
+                			linkElement.getText().contains("6")||
+                			linkElement.getText().contains("7")||
+							linkElement.getText().contains("8")||
+							linkElement.getText().contains("9")){
                         // Click the link using JavaScript
                 		xpathForLink = xpathForLink+"//a";
                 		printDateTime("Link displayed time and clicked  -->");
@@ -255,7 +259,10 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
                 			linkElement.getText().contains("3")|| 
                 			linkElement.getText().contains("4")|| 
                 			linkElement.getText().contains("5")|| 
-                			linkElement.getText().contains("6")) {
+                			linkElement.getText().contains("6")||
+                			linkElement.getText().contains("7")||
+							linkElement.getText().contains("8")||
+							linkElement.getText().contains("9")) {
                         // Click the link using JavaScript
                 		xpathForLink = xpathForLink+"//a";
                 		js.executeScript("arguments[0].click();", driver.findElement(By.xpath(xpathForLink)));
@@ -392,37 +399,10 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	}
 
 	private static void clickOnPayButton() {
-		
-
-		//wait15.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='paymentView']//tbody/tr[3]/td")));
-		
-//		WebElement payButton = driver.findElement(By.xpath("//button[@id='btnSubmit']"));
-//		wait15.until(ExpectedConditions.elementToBeClickable(payButton));
-//		try {
-//			js.executeScript("arguments[0].click();", payButton);
-//			//payButton.click();
-//			wait5.until(ExpectedConditions.urlContains("merchant"));
-//		} catch (Exception e) {
-//			try {
-//				js.executeScript("arguments[0].click();", payButton);
-//			//	payButton.click();
-//			} catch (Exception e2) {
-//				System.out.println("Some error - merchant was not seen in URL -->" + driver.getCurrentUrl());
-//			}
-//		}
-//	}
-
-	
 	try {
         WebElement payButton = driver.findElement(By.xpath("//button[@id='btnSubmit']"));
         wait15.until(ExpectedConditions.elementToBeClickable(payButton));
-//        js.executeScript("arguments[0].click();", payButton);
-//        System.out.println("first pay now clicked");
-//       for(int i=0;i<5;i++) {
-//    	   js.executeScript("arguments[0].click();", payButton);
-//    	   System.out.println("Pay button clicked in for loop");
-//    	   Thread.sleep(250);
-//       }
+
         // Continuously click Pay button until URL contains "merchant"
         while (!driver.getCurrentUrl().contains("merchant")) {
             try {
@@ -430,6 +410,21 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
                 js.executeScript("arguments[0].click();", payButton);
                 System.out.println("waited 500 ms");
                 Thread.sleep(500);
+                
+                driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        		try {
+        		WebElement errorMsg = driver.findElement(By.xpath("//input[@id='agree_term']/following-sibling::span"));
+        		System.out.println(errorMsg.getText());
+        		if(errorMsg.getText().contains("required")) {
+        			WebElement agreementCheckBox = driver.findElement(By.xpath("//input[@id='agree_term']"));
+        			js.executeScript("arguments[0].click();", agreementCheckBox);
+        			wait15.until(ExpectedConditions.alertIsPresent());
+        			driver.switchTo().alert().accept();
+        		}
+        		}catch(Exception e) {
+        			System.out.println("Ran into exception while clicking on terms and conditions check box");
+        		}
+        		
                 System.out.println("Pay button clicked in while loop");
             } catch (Exception e) {
                 System.out.println("Pay button click attempt failed. Retrying...");
@@ -443,14 +438,19 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	
 	private static void selectAgreement() throws InterruptedException {
 		wait15.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='agree_term']")));
+		wait5.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='agree_term']")));
 		WebElement agreementCheckBox = driver.findElement(By.xpath("//input[@id='agree_term']"));
 		js.executeScript("arguments[0].click();", agreementCheckBox);
+		
+		
 		//scrollToElementUsingMouse(driver, agreementCheckBox);
 		//Thread.sleep(200);
 		//agreementCheckBox.click();
 		wait15.until(ExpectedConditions.alertIsPresent());
 		driver.switchTo().alert().accept();
-//		try {
+		
+		
+		//		try {
 //			wait10.until(ExpectedConditions
 //					.textToBePresentInElementLocated(By.xpath("//th[normalize-space()='Grand Total']"), "Grand Total"));
 //		} catch (Exception e) {
