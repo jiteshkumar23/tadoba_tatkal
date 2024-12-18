@@ -255,14 +255,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
                 	WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathForLink)));
                     System.out.println("Text displayed is "+linkElement.getText());
                 	if (linkElement.getText().contains("1") || 
-                			linkElement.getText().contains("2")|| 
-                			linkElement.getText().contains("3")|| 
-                			linkElement.getText().contains("4")|| 
-                			linkElement.getText().contains("5")|| 
-                			linkElement.getText().contains("6")||
-                			linkElement.getText().contains("7")||
-							linkElement.getText().contains("8")||
-							linkElement.getText().contains("9")) {
+                			linkElement.getText().contains("2")) {
                         // Click the link using JavaScript
                 		xpathForLink = xpathForLink+"//a";
                 		js.executeScript("arguments[0].click();", driver.findElement(By.xpath(xpathForLink)));
