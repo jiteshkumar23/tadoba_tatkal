@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<parameter name="jvmArgs" value="-X	mx4096m" />	
+	<test thread-count="5" name="Test">
+		<classes>
+			<class name="booking.TatkalBooking">
+				<methods>
+					<include name="fillOnlyForm"></include>
+				</methods>
+
+			</class>
+
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->

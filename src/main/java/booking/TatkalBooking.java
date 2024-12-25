@@ -32,6 +32,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	static WebDriverWait wait15;
 	static WebDriverWait wait30;
 	static WebDriverWait wait200;
+	static WebDriverWait wait600;
 	static String availableTickets;
 	static ArrayList<String> listOfName;
 	static ArrayList<String> listOfGender;
@@ -70,6 +71,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		wait15 = new WebDriverWait(driver, Duration.ofSeconds(15));
 		wait30 = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait200 = new WebDriverWait(driver, Duration.ofSeconds(200));
+		wait600 = new WebDriverWait(driver, Duration.ofSeconds(600));
 		actions = new Actions(driver);
 
 		numberOfMembers = TatkalBooking_DataProfile1.numberOfMembers;
@@ -143,6 +145,29 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 //		} else if (paymentMode.toLowerCase().equalsIgnoreCase("credit card")) {
 //		    doCreditCardPayment();
 //		}
+
+		System.out.println("");
+		System.out.println("Flow successfully completed");
+		System.out.println("###################   Completed   ###################");
+		printDateTime("Ending Time -->");
+
+
+	}
+	
+	@Test
+	private static void fillOnlyForm() throws Exception {
+		setMaxCount();
+
+		// select number of people in dropdown
+		selectNumberOfPeopleInDropdown();
+
+		// enter Member details from Autofill plugin
+		fillMemberDetailsfromAutoFillPlugin();
+
+		Thread.sleep(200);		
+		selectAgreement();
+
+		clickOnPayButton();
 
 		System.out.println("");
 		System.out.println("Flow successfully completed");
@@ -456,9 +481,11 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	}
 
 	private static void selectNumberOfPeopleInDropdown() {
-		wait15.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[@id='no_people']")));
+		
+		System.out.println("Waiting for number of people dropdown");
+		wait600.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[@id='no_people']")));
 		WebElement numberOfPeopleDropdown = driver.findElement(By.xpath("//select[@id='no_people']"));
-
+		System.out.println("Found the number of people dropdown");
 		wait15.until(ExpectedConditions.elementToBeClickable(numberOfPeopleDropdown));
 		Select select4 = new Select(driver.findElement(By.xpath("//select[@id='no_people']")));
 
@@ -469,7 +496,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 			e.printStackTrace();
 			select4.selectByVisibleText(numberOfMembers);
 		}
-
+		System.out.println("Selected the number of people in dropdown");
 		wait15.until(
 				ExpectedConditions.visibilityOfElementLocated((By.xpath("//input[@id='touristName0']"))));
 	}
