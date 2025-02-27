@@ -33,6 +33,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	static WebDriverWait wait30;
 	static WebDriverWait wait200;
 	static WebDriverWait wait600;
+	static WebDriverWait wait900;
 	static String availableTickets;
 	static ArrayList<String> listOfName;
 	static ArrayList<String> listOfGender;
@@ -72,6 +73,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		wait30 = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait200 = new WebDriverWait(driver, Duration.ofSeconds(200));
 		wait600 = new WebDriverWait(driver, Duration.ofSeconds(600));
+		wait900 = new WebDriverWait(driver, Duration.ofSeconds(900));
 		actions = new Actions(driver);
 
 		numberOfMembers = TatkalBooking_DataProfile1.numberOfMembers;
@@ -93,7 +95,8 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
 		// Select Eco Tourist Place
-		selectEcoTouristPlace();
+		//selectEcoTouristPlace();
+		waitUntilDroddownIsDisplayed();
 
 		// Select Zone
 		selectZone();
@@ -290,7 +293,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 
                 	}else {
                 		System.out.println("Link not found, clicking search button...");
-                        driver.findElement(By.xpath("//button[@id='btnSubmit']")).click();;
+                		performSearchAgain();
                 	}
                 	} catch (Exception e) {
                 		System.out.println("Some exception is there, but i will continue to try --> ");
@@ -300,7 +303,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
             
         } catch (Exception e) {
         	System.out.println("Some exception is there, but i will continue to try --> ");
-            e.printStackTrace();
+           
         }
 		
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
@@ -586,6 +589,72 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		Select select4 = new Select(driver.findElement(By.xpath("//select[@id='cmbZone']")));
 		select4.selectByVisibleText(TatkalBooking_DataProfile1.zoneFromData);
 
+	}
+	
+	public static void performSearchAgain() throws InterruptedException{
+		
+		// Select Eco Tourist Place
+		
+				System.out.println("*************Performing Search Again ******************");
+				selectEcoTouristPlace();
+
+				// Select Zone
+				selectZone();
+
+				if (typeOfBooking.toLowerCase().equalsIgnoreCase("regular")) {
+				    // select vehicle for Regular : Regular change 1
+				    selectVehicleForRegularFlow();
+				}
+
+				if (typeOfBooking.toLowerCase().equalsIgnoreCase("tatkal")) {
+				    selectDateForTatkalFlow(); // for Tatkal flow
+				}
+
+				if (typeOfBooking.toLowerCase().equalsIgnoreCase("regular")) {
+				    // select Date for Regular flow from test data : Regular change 2
+				    selectRegularBookingDateInCalendar("09/04/2025"); // for Regular flow
+				}
+
+				// click on search button
+				clickOnSearchButton();
+
+		
+	}
+	
+	public static void waitUntilDroddownIsDisplayed() {
+		
+		try {
+			driver.manage().timeouts().implicitlyWait(Duration.ofMillis(200));
+            // Loop until the link is displayed and clickable
+            while (true) {
+                try {
+                	
+                	WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(250));
+                	WebElement linkElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@id='cmbSanctuary']")));
+                    System.out.println("Text displayed is "+linkElement.getText());
+                	if (linkElement.getText().toLowerCase().contains("please select")){
+                		
+                		WebElement ecoTouristPlaceDropdown = driver.findElement(By.xpath("//select[@id='cmbSanctuary']"));
+                		Select select4 = new Select(ecoTouristPlaceDropdown);
+                		select4.selectByVisibleText(TatkalBooking_DataProfile1.ecoTouristPlace);
+                        break; // Exit the loop if the link is clicked
+
+                	}else {
+                		System.out.println("Dropdown not found...");
+                		Thread.sleep(200);
+                        
+                	}
+                	} catch (Exception e) {
+                		System.out.println("Waiting for eco tourist place dropdown to display --> ");
+                        //e.printStackTrace();
+                }
+            }
+            
+        } catch (Exception e) {
+        	System.out.println("Dropdown not found, but i will continue to try --> ");
+            //e.printStackTrace();
+        }
+		
 	}
 
 }
