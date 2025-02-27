@@ -91,15 +91,16 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		String currentURL = driver.getCurrentUrl();
 		System.out.println(currentURL);
 
-		// Set implicit timeout later
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-
 		// Select Eco Tourist Place
 		//selectEcoTouristPlace();
-		waitUntilDroddownIsDisplayed();
+		waitUntilDropdownIsDisplayed();
 
 		// Select Zone
-		selectZone();
+		waitUntilZoneDropdownIsDisplayed();
+		//selectZone();
+		
+		// Set implicit timeout later
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
 		if (typeOfBooking.toLowerCase().equalsIgnoreCase("regular")) {
 		    // select vehicle for Regular : Regular change 1
@@ -621,7 +622,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		
 	}
 	
-	public static void waitUntilDroddownIsDisplayed() {
+	public static void waitUntilDropdownIsDisplayed() {
 		
 		try {
 			driver.manage().timeouts().implicitlyWait(Duration.ofMillis(200));
@@ -652,6 +653,42 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
             
         } catch (Exception e) {
         	System.out.println("Dropdown not found, but i will continue to try --> ");
+            //e.printStackTrace();
+        }
+		
+	}
+	
+public static void waitUntilZoneDropdownIsDisplayed() {
+		
+		try {
+			driver.manage().timeouts().implicitlyWait(Duration.ofMillis(200));
+            // Loop until the link is displayed and clickable
+            while (true) {
+                try {
+                	WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(200));
+                	WebElement linkElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@id='cmbZone']")));
+                	wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//select[@id='cmbZone']"),
+            				TatkalBooking_DataProfile1.zoneFromData));
+                    System.out.println("Text displayed is "+linkElement.getText());
+                	if (linkElement.getText().toLowerCase().contains(TatkalBooking_DataProfile1.zoneFromData.toLowerCase())){
+                		System.out.println("################Zone is found in dropdown#############");
+                		Select select4 = new Select(driver.findElement(By.xpath("//select[@id='cmbZone']")));
+                		select4.selectByVisibleText(TatkalBooking_DataProfile1.zoneFromData);
+                        break; // Exit the loop if the link is clicked
+
+                	}else {
+                		System.out.println("Dropdown not found...");
+                		Thread.sleep(200);
+                        
+                	}
+                	} catch (Exception e) {
+                		System.out.println("Waiting for zone dropdown to display --> ");
+                        //e.printStackTrace();
+                }
+            }
+            
+        } catch (Exception e) {
+        	System.out.println("Zone Dropdown not found, but i will continue to try --> ");
             //e.printStackTrace();
         }
 		
