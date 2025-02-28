@@ -113,7 +113,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 
 		if (typeOfBooking.toLowerCase().equalsIgnoreCase("regular")) {
 		    // select Date for Regular flow from test data : Regular change 2
-		    selectRegularBookingDateInCalendar("09/04/2025"); // for Regular flow
+		    selectRegularBookingDateInCalendar("09/06/2025"); // for Regular flow
 		}
 
 		// click on search button
@@ -280,7 +280,7 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
             while (true) {
                 try {
                 	
-                	WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(250));
+                	WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
                 	WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathForLink)));
                     System.out.println("Text displayed is "+linkElement.getText());
                 	if (linkElement.getText().contains("1") || 
@@ -297,13 +297,14 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
                 		performSearchAgain();
                 	}
                 	} catch (Exception e) {
-                		System.out.println("Some exception is there, but i will continue to try --> ");
+                		System.out.println("Some exception is there, but i will continue to try catch block1--> ");
                         e.printStackTrace();
+                        performSearchAgain();
                 }
             }
             
         } catch (Exception e) {
-        	System.out.println("Some exception is there, but i will continue to try --> ");
+        	System.out.println("Some exception is there, but i will continue to try catch block2--> ");
            
         }
 		
@@ -531,6 +532,8 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		WebElement ecoTouristPlaceDropdown = driver.findElement(By.xpath("//select[@id='cmbSanctuary']"));
 		wait15.until(ExpectedConditions.elementToBeClickable(ecoTouristPlaceDropdown));
 		Select select4 = new Select(ecoTouristPlaceDropdown);
+		select4.selectByIndex(0);
+		Thread.sleep(100);
 		select4.selectByVisibleText(TatkalBooking_DataProfile1.ecoTouristPlace);
 	}
 
@@ -583,12 +586,16 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 	}
 
 	public static void selectZone() throws InterruptedException {
+		try {
 		WebElement zoneDropdown = driver.findElement(By.xpath("//select[@id='cmbZone']"));
 		wait15.until(ExpectedConditions.elementToBeClickable(zoneDropdown));
 		wait15.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//select[@id='cmbZone']"),
 				TatkalBooking_DataProfile1.zoneFromData));
 		Select select4 = new Select(driver.findElement(By.xpath("//select[@id='cmbZone']")));
 		select4.selectByVisibleText(TatkalBooking_DataProfile1.zoneFromData);
+		}catch(Exception e) {
+			selectEcoTouristPlace();
+		}
 
 	}
 	
@@ -597,10 +604,9 @@ public class TatkalBooking extends TatkalBooking_DataProfile1 {
 		// Select Eco Tourist Place
 		
 				System.out.println("*************Performing Search Again ******************");
-				selectEcoTouristPlace();
+				
 
-				// Select Zone
-				selectZone();
+				waitUntilZoneDropdownIsDisplayed();
 
 				if (typeOfBooking.toLowerCase().equalsIgnoreCase("regular")) {
 				    // select vehicle for Regular : Regular change 1
@@ -682,6 +688,7 @@ public static void waitUntilZoneDropdownIsDisplayed() {
                         
                 	}
                 	} catch (Exception e) {
+                		selectEcoTouristPlace();
                 		System.out.println("Waiting for zone dropdown to display --> ");
                         //e.printStackTrace();
                 }
